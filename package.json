@@ -1,0 +1,16 @@
+{
+    "name": "node-red-contrib-mercurio",
+    "version": "1.0.0",
+    "description": "Mercurio Notification Gateway client",
+    "author": "Riccardo Bertini",
+    "email": "riccardo.bertini@crib-lab.it",
+    "keywords": [ "voice call","tts","gateway","mail sender","sms","push notification","crib-lab"],
+    "node-red": {
+        "nodes": {
+            "mercurio": "mercurio.js"
+        }
+    },
+    "dependencies": {
+        "request": "^2.83.0"
+    }
+}

@@ -1,0 +1,152 @@
+<script type="text/javascript">
+    RED.nodes.registerType('mercurio',{
+        category: 'input',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""},
+            notification: {value:""},
+            username: {value:"",type:"text",required:true},
+            password: {value:"",type:"password",required:true},
+            serverurl: {value:""}           
+        },
+        inputs:1,
+        outputs:2,
+        icon: "white-globe.png",
+        outputLabels: ["Success","Error"],        
+        label: function() {
+            return this.name||"mercurio";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="mercurio">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-serverurl"><i class="icon-tag"></i> Server URL</label>
+        <input type="text" id="node-input-serverurl" placeholder="(Default) https://cloud.crib-lab.it:1971">
+    </div>
+    <div class="form-row">
+        <label for="node-input-username"><i class="icon-tag"></i> Username</label>
+        <input type="text" id="node-input-username" placeholder="Mercurio account Username">
+    </div>
+    <div class="form-row">
+        <label for="node-input-password"><i class="icon-tag"></i> Password</label>
+        <input type="password" id="node-input-password" placeholder="Mercurio account Password">
+    </div>
+    <div class="form-row">
+        <label for="node-input-notification"><i class="icon-tag"></i> Type</label>
+        <select value="0" id="node-input-notification">
+            <option value="0">msg.type</option>
+            <option value="1">Voip</option>
+            <option value="2">SMS</option>
+            <option value="3">E-mail</option>
+            <option value="4">Push</option>
+            <option value="5">Get Logs</option>
+        </select>        
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="mercurio">
+    <p>Client for Crib-Lab Mercurio notification Gateway</p>
+    <br/>
+    <p>To perform Voip Call with TTS engine (msg.type=1), set the msg with the parameters followed :
+        <br/>
+        <table width="100%">
+            <tr>
+                <td>msg.phone</td>
+                <td>Phone to Call</td>
+            </tr>
+            <tr>
+                <td>msg.message</td>
+                <td>Text to say by TTS engine</td>
+            </tr>
+            <tr>
+                <td>msg.sms</td>
+                <td>Text to send by sms if not answer (optional)</td>
+            </tr>
+        </table>
+    </p>
+    <br/>
+    <p>To send sms (msg.type=2), set the msg with the parameters followed :
+        <br/>
+        <table>
+            <tr>
+                <td>msg.phone</td>
+                <td>Phone to send sms</td>
+            </tr>
+            <tr>
+                <td>msg.message</td>
+                <td>Body of messagge</td>
+            </tr>
+            <tr>
+                <td>msg.from</td>
+                <td>Name or number of sender</td>
+            </tr>
+        </table>
+    </p>
+    <br/>
+    <p>To send E-mail (msg.type=3), set the msg with the parameters followed :
+        <br/>
+        <table>
+            <tr>
+                <td>msg.from</td>
+                <td>E-mail sender</td>
+            </tr>
+            <tr>
+                <td>msg.to</td>
+                <td>E-mail recipient</td>
+            </tr>
+            <tr>
+                <td>msg.subject</td>
+                <td>E-mail subject</td>
+            </tr>
+            <tr>
+                <td>msg.message</td>
+                <td>Body of E-mail</td>
+            </tr>
+        </table>
+    </p>
+    <br/>
+    <p>To send Push notofication for Android & IOS (msg.type=4), set the msg with the parameters followed :
+        <br/>
+        <table>
+            <tr>
+                <td>msg.appname</td>
+                <td>Name of application owner</td>
+            </tr>
+            <tr>
+                <td>msg.title</td>
+                <td>Title of notification</td>
+            </tr>
+            <tr>
+                <td>msg.shortmessage</td>
+                <td>Short message (show in title bar)</td>
+            </tr>
+            <tr>
+                <td>msg.longmessage</td>
+                <td>Body of message</td>
+            </tr>
+            <tr>
+                <td>msg.platform</td>
+                <td>Platform type : 1 Android / 2 IOS</td>
+            </tr>
+        </table>
+    </p>
+    <br/>
+    <p>To get logs of notifications (msg.type=5), set the msg with the parameters followed :
+        <br/>
+        <table>
+            <tr>
+                <td>msg.datefrom</td>
+                <td>From date : YYYY-MM-DDTHH:MM</td>
+            </tr>
+            <tr>
+                <td>msg.dateto</td>
+                <td>To date : YYYY-MM-DDTHH:MM</td>
+            </tr>
+        </table>
+    </p>
+</script>
